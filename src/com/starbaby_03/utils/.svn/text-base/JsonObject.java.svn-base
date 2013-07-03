@@ -1,0 +1,51 @@
+package com.starbaby_03.utils;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+public class JsonObject {
+	
+	JSONObject json;
+	public int getMSG(String request) throws JSONException{
+		int MSG=0;
+		json=new JSONObject(request);
+		MSG=json.getInt("msg");
+		return MSG;
+		
+	}
+	public int getUID(String request) throws JSONException{
+		int UID=0;
+		json=new JSONObject(request);
+		UID=json.getInt("uid");
+		return UID;
+		
+	}
+	public String getUSERNAME(String request) throws JSONException{
+		String USERNAME=null;
+		json=new JSONObject(request);
+		USERNAME=json.getString("username");
+		return USERNAME;
+		
+	}
+	public String getEMAIL(String request) throws JSONException{
+		String EMAIL=null;
+		json=new JSONObject(request);
+		EMAIL=json.getString("email");
+		return EMAIL;
+		
+	}
+	public String getAVATAR(String request) throws JSONException{
+		String AVATAR=null;
+		json=new JSONObject(request);
+		AVATAR=json.getString("avatar");
+		return AVATAR;
+		
+	}
+	public String getIMAGEURl(String request) throws JSONException{
+		String IMAGEURl=null;
+		json=new JSONObject(request);
+		IMAGEURl=json.getString("imageurl");
+		return IMAGEURl;
+		
+	}
+}

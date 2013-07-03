@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dp" >
+
+
+    <ImageView
+        android:id="@+id/aboutus_infocenter_store_frame_imageview"
+        android:layout_width="94dp"
+        android:layout_height="97dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/app"
+        android:scaleType="fitXY" >
+    </ImageView>
+
+    <ImageView
+        android:id="@+id/aboutus_infocenter_store_frame_imageview3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/gallery_mapstorage_frame2"
+        android:scaleType="fitXY" >
+    </ImageView>
+
+    <TextView
+        android:id="@+id/aboutus_infocenter_store_frame_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/aboutus_infocenter_store_frame_imageview3"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/gallery_mapstorage_title"
+        android:gravity="center"
+        android:text="cell_name"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/white"
+        android:textSize="10dp" />
+
+</RelativeLayout>

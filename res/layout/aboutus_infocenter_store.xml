@@ -1,0 +1,14 @@
+<RelativeLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+     xmlns:android="http://schemas.android.com/apk/res/android">
+     <GridView 
+        android:id="@+id/aboutus_infocenter_store_gridview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+		android:gravity="center"
+        android:numColumns="3"
+        android:horizontalSpacing="10dp"
+        android:listSelector="#00000000"
+        ></GridView>
+</RelativeLayout>

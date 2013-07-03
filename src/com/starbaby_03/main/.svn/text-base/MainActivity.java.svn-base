@@ -1,0 +1,626 @@
+package com.starbaby_03.main;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import com.baidu.mobstat.StatService;
+import com.example.starbaby_03.R;
+import com.starbaby_03.Gallery.mapStorage;
+import com.starbaby_03.aboutUs.infoCenter;
+import com.starbaby_03.beautify.addWords;
+import com.starbaby_03.beautify.addWords_01;
+import com.starbaby_03.camera.mCamera;
+import com.starbaby_03.info.user_enter;
+import com.starbaby_03.info.user_register;
+import com.starbaby_03.saveAndSearch.savePhoto;
+import com.starbaby_03.scroll.scroll;
+import com.starbaby_03.upDate.NetWork;
+import com.starbaby_03.upDate.getVer;
+import com.starbaby_03.utils.Utils;
+import com.starbaby_03.utils.weiboUtils;
+import com.starbaby_03.view.MainActivity_ImgBnt;
+import com.starbaby_03.weibo.PullDownActivity;
+
+
+
+
+import android.R.integer;
+import android.R.menu;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.net.Uri;
+import android.os.Bundle;
+import android.os.Environment;
+import android.os.Handler;
+import android.provider.MediaStore;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.ContentResolver;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.Bitmap.Config;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.PorterDuff.Mode;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
+import android.graphics.RectF;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.util.Log;
+import android.view.Gravity;
+import android.view.Menu;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
+import android.view.Window;
+import android.webkit.WebView;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.GridView;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.SimpleAdapter;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public class MainActivity extends Activity implements OnClickListener{
+	
+	private ImageView imageview1,imageview2,imageview3;
+//	private MainActivity_ImgBnt imgBnt1,imgBnt2,imgBnt3;
+	private ImageButton imagebnt1;
+	 //自定义ImageButton上面显示的字体的大小
+    private float imgBnt_textsize = 32f;
+    //自定义ImageButton上面显示的字体的颜色
+    private int imgBnt1_textcolor = Color.WHITE;
+	private static int allow_minCode=0;
+	private int newVerCode=0;
+    private String newVerName="";
+    public ProgressDialog pBar;
+    private Handler handler=new Handler();
+	private Uri originalUri;
+	public static final int NONE = 0;
+	public static final int PHOTOHRAPH = 1;// 拍照
+	public static final int PHOTOZOOM = 2; // 缩放
+	public static final int PHOTORESOULT = 3;// 结果
+	public static final int PHOTOZOOM2=4;//美化
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		setContentView(R.layout.main_activity_main);
+//		Check();
+//		init();
+	}
+	/**
+	 * APP版本升级模块
+	 */
+	//开启APP前检测网络
+	public void Check()
+	{
+
+	        ConnectivityManager manager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+	        NetworkInfo info = manager.getActiveNetworkInfo();
+	        if(info != null &&info.isConnected())
+	        {
+	        	Judge_allow_minCode();
+	        	Toast.makeText(MainActivity.this, "connect", 1000).show();
+	        }
+	        else {
+	        	Judge_allow_minCode2();
+	        	Toast.makeText(MainActivity.this, "NoConnect", 1000).show();
+			}
+	}
+	//未连接网络的前提下，开启app自检服务器最新版本
+	public void Judge_allow_minCode2()
+	{
+		int verCde=getVer.getVerCode(this);
+		if(verCde<allow_minCode)
+		{
+			StringBuffer sb=new StringBuffer();
+			sb.append("网络连接错误");
+			new AlertDialog.Builder(this).setTitle("你的版本过低").setMessage(sb.toString()).setPositiveButton("确定", new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					// TODO Auto-generated method stub
+					finish();
+				}
+			}).create().show();
+		}else {
+			init();
+		}
+		Toast.makeText(MainActivity.this, "请检查你的网络", 1000).show();
+	}
+	 //连接网络的前提下，开启app自检服务器最新版本
+	public int Judge_allow_minCode()
+	{
+		try {
+			String versio=NetWork.getContent(getVer.UPDATE_SERVER
+			            + getVer.UPDATE_VERJSON);
+			JSONArray array=new JSONArray(versio);
+			if(array.length()>0)
+			{
+				JSONObject obj=array.getJSONObject(0);
+				allow_minCode=Integer.parseInt(obj.getString("allow_min"));
+				String Newupdate_link=obj.getString("update_link");
+				if(Newupdate_link!=null)
+				{
+					int verCode=getVer.getVerCode(this);
+            	
+					if(verCode<allow_minCode)
+					{
+						forceNewVersionShow(Newupdate_link);
+					}
+					else 
+					{
+						newVerCode = Integer.parseInt(obj.getString("version_num"));
+//                 	   newVerName = obj.getString("verName");
+						if(newVerCode>verCode)
+						{
+							doNewVersionShow(Newupdate_link);
+						}
+						else
+						{
+							init();
+						}
+					}
+				}else {
+					init();
+				}
+				}
+			} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+			// TODO Auto-generated catch block
+				e.printStackTrace();
+			}catch (JSONException e) {
+			// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return allow_minCode;
+		
+	}
+	//强制更新操作
+	private void forceNewVersionShow(final String updata_link) {
+		// TODO Auto-generated method stub
+		int verCode=getVer.getVerCode(this);
+		String verName=getVer.getVerName(this);
+		StringBuffer sb=new StringBuffer();
+		sb.append("当前版本:");
+	    sb.append(verName);
+	    sb.append("verCode:");
+	    sb.append(verCode);
+		sb.append("低于运行该软件的最低版本:");
+		sb.append(allow_minCode);
+		sb.append("是否更新");
+		new AlertDialog.Builder(this).setTitle("更新软件").setMessage(sb.toString()).setPositiveButton("确定", new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+				pBar=new ProgressDialog(MainActivity.this);
+                pBar.setTitle("正在下载");
+                pBar.setMessage("请稍后...");
+                pBar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                downFile(updata_link);
+			}
+		}).create().show();
+		
+	}
+    public void doNewVersionShow(final String updata_link)
+    {
+        int verCode=getVer.getVerCode(this);
+        String verName=getVer.getVerName(this);
+        StringBuffer sb=new StringBuffer();
+        sb.append("当前版本:");
+        sb.append(verName);
+        sb.append(" Code:");
+        sb.append(verCode);
+        sb.append(",发现新版本:");
+        sb.append(newVerName);
+        sb.append(",是否更新?");
+        new AlertDialog.Builder(this).setTitle("软件更新").setMessage(sb.toString()).setPositiveButton("确定", 
+            new DialogInterface.OnClickListener()
+            {
+                public void onClick(DialogInterface dialog, int which)
+                {
+                	pBar=new ProgressDialog(MainActivity.this);
+                    pBar.setTitle("正在下载");
+                    pBar.setMessage("请稍后...");
+                    pBar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                    downFile(updata_link);
+                }
+            }).setNegativeButton("暂时不更新", new DialogInterface.OnClickListener()
+            {
+                public void onClick(DialogInterface dialog, int which)
+                {
+                    init();             
+                }
+            }).create().show();
+    }
+    public void downFile(final String updata_link)
+    {
+        pBar.show();     
+        new Thread()
+        {
+            public void run()
+            {
+                HttpClient client=new DefaultHttpClient();
+//                HttpGet get=new HttpGet(getVer.UPDATE_SERVER+getVer.UPDATE_APKNAME);
+                HttpGet get=new HttpGet(updata_link+getVer.UPDATE_APKNAME);
+                Log.e("info","net"+get);
+                HttpResponse response;
+                try
+                {
+                    response=client.execute(get);
+                    Log.e("info","back7"+response);
+                    HttpEntity entity=response.getEntity();
+                    long length=entity.getContentLength();
+                    InputStream is=entity.getContent();
+                    FileOutputStream fileoutputstream=null;
+                    //下载后生成的apk.name
+                    File file=new File(Environment.getExternalStorageDirectory(),getVer.UPDATE_SAVENAME);
+                    if(is!=null)
+                    {                      
+                        Log.e("info","back8"+file);
+                        fileoutputstream=new FileOutputStream(file);
+                        byte[] buf=new byte[1024];
+                        int ch=-1;
+                        int count=0;
+                        while((ch=is.read(buf))!=-1)
+                        {
+                            fileoutputstream.write(buf,0, ch);
+                            count+=ch;
+                            Log.e("info","back10"+count);
+                        }
+                    }
+                    fileoutputstream.flush();
+                    if(fileoutputstream!=null)
+                    {
+                        fileoutputstream.close();
+                        is.close();
+                    }                    
+                    down();
+                    Log.e("info","back11");
+                }
+                catch (ClientProtocolException e)
+                {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+                catch (IOException e)
+                {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }                
+        }.start();
+    }
+    protected void down()
+    {
+        handler.post(new Runnable()
+        {
+            public void run()
+            {
+                pBar.cancel();
+                Log.e("info","done");
+                update();
+                Log.e("info","do");
+            }
+        });  
+    }
+    public void update()
+    {
+        File apkFile=new File(Environment.getExternalStorageDirectory(),getVer.UPDATE_SAVENAME);
+        Intent intent=new Intent();
+        intent.setAction(Intent.ACTION_VIEW);
+        intent.setDataAndType(Uri.parse("file://" + apkFile.toString()), "application/vnd.android.package-archive");
+        startActivity(intent);
+    }
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+	/**
+	 * 界面显示。
+	 *****************************************************************************************************************
+	 *****************************************************************************************************************
+	 *****************************************************************************************************************
+	 */
+	//显示UI
+	private void init() {
+		imageview1=(ImageView) findViewById(R.id.imageview1);
+//		imageview2=(ImageView) findViewById(R.id.imageview2);
+//		imageview3=(ImageView) findViewById(R.id.imageview3);
+		imagebnt1=(ImageButton) findViewById(R.id.main_activity_main_bnt);
+		imagebnt1.setOnClickListener(this);
+		File tempFile=new File("/sdcard/ll1x/"+"headImg"+".jpg");
+		Bitmap orginalBitmap=BitmapFactory.decodeFile(tempFile.getAbsolutePath());
+		if(orginalBitmap!= null)
+		{
+			circleHeadImg(orginalBitmap);
+		}else {
+			Bitmap orginalBitmap2=BitmapFactory.decodeResource(this.getResources(), R.drawable.menu2);
+			imageview2.setImageBitmap(orginalBitmap2);//剪裁原始图片为圆角。美工
+//			circleHeadImg(orginalBitmap2);
+		}
+
+		final Bitmap bitmap = ((BitmapDrawable) (imageview3.getDrawable())).getBitmap();
+		//修改头像操作
+		imageview2.setOnTouchListener(new OnTouchListener() {
+		
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				// TODO Auto-generated method stub
+				openHeadPhoto();
+				return false;
+			}
+		});
+		//主界面操作
+		imageview3.setOnTouchListener(new OnTouchListener() {
+			
+			@Override
+			public boolean onTouch(View v, MotionEvent arg1) {
+				// TODO Auto-generated method stub
+				switch (arg1.getAction() & MotionEvent.ACTION_MASK) {
+
+				case MotionEvent.ACTION_DOWN: 
+					break;
+				case MotionEvent.ACTION_UP:
+					if(bitmap.getPixel((int)(arg1.getX()),((int)arg1.getY()))==0x0)
+					{
+						Log.i("Test", "透明");
+						Intent intent=new Intent(MainActivity.this,user_enter.class);
+						startActivity(intent);
+						finish();
+						return true;//透明区域返回true
+					}
+					if(bitmap.getPixel((int)(arg1.getX()),((int)arg1.getY()))==0xffcccc33)
+					{
+						Log.i("Test", "个人中心");
+//						Intent intent=new Intent(MainActivity.this,user_enter.class);
+////						intent.putExtra(Utils.INTENT_FLAG, Utils.NO_WORDS);
+//						startActivity(intent);
+//						finish();
+						return true;
+					}
+					if(bitmap.getPixel((int)(arg1.getX()),((int)arg1.getY()))==0xffea7a03)
+					{
+						Log.i("Test", "拍照");
+						Toast toast = Toast.makeText(getApplicationContext(),
+							     "正在打开摄像头", 0);
+							   toast.setGravity(Gravity.CENTER, 0, 0);
+							   toast.show();
+						Intent intent=new Intent(MainActivity.this,mCamera.class);
+						startActivity(intent);
+						finish();
+						return true;
+					}
+					if(bitmap.getPixel((int)(arg1.getX()),((int)arg1.getY()))==0xffff3366)
+					{
+						Log.i("Test", "美化");
+						openBeautify();
+						return true;
+					}
+					if(bitmap.getPixel((int)(arg1.getX()),((int)arg1.getY()))==0xff99cccc)
+					{
+						Log.i("Test", "照片秀");
+						Intent intent=new Intent(MainActivity.this,mapStorage.class);
+						intent.putExtra(weiboUtils.weibo_sharePic_key, weiboUtils.weibo_showPic_Flag);
+						
+						startActivity(intent);
+						finish();
+						return true;
+					}else {
+						Log.i("color", bitmap.getPixel((int)(arg1.getX()),((int)arg1.getY()))+"");
+					}
+					break;
+				}
+				return true;
+			}
+		});
+				
+	}
+	//打开美化模块
+	protected void openBeautify() {
+		// TODO Auto-generated method stub
+		ShowPickDialog();
+	}
+	//打开设置头像模块
+	protected void openHeadPhoto(){
+		ShowHeadPhoto();
+	}
+	/**
+	 ** 设置头像
+	 */
+	private void ShowHeadPhoto(){
+		new AlertDialog.Builder(this)
+		.setTitle("选择头像")
+		.setNegativeButton("相册", new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent(Intent.ACTION_GET_CONTENT, null);
+				intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+						"image/*");
+				startActivityForResult(intent, PHOTOZOOM);
+			}
+		}).setPositiveButton("拍照", new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+				intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(
+						Environment.getExternalStorageDirectory(), "temp.jpg")));
+				System.out.println("=============" + Environment.getExternalStorageDirectory());
+				startActivityForResult(intent, PHOTOHRAPH);
+			}
+		}).show();
+	}
+	@Override
+	//个操作的相对相应事件
+	protected void onActivityResult(int requestCode, int resultCode, final Intent data) {
+		if (resultCode == NONE)
+			return;
+		// 拍照
+		if (requestCode == PHOTOHRAPH) {
+			// 设置文件保存路径这里放在跟目录下
+			File picture = new File(Environment.getExternalStorageDirectory()
+					+ "/temp.jpg");
+			System.out.println("------------------------" + picture.getPath());
+			startPhotoZoom(Uri.fromFile(picture));
+		}
+		if (data == null)
+			return;
+		// 读取相册缩放图片
+		if (requestCode == PHOTOZOOM) {
+			startPhotoZoom(data.getData());
+		}
+		// 处理结果
+		if (requestCode == PHOTORESOULT) {
+			Bundle extras = data.getExtras();
+			if (extras != null) {
+				Bitmap photo = extras.getParcelable("data");
+			    //保存头像到本地
+					try {
+						new savePhoto().saveHeadImg(photo);
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					File tempFile=new File("/sdcard/ll1x/"+"headImg"+".jpg");
+					Bitmap headImgBitmap=BitmapFactory.decodeFile(tempFile.getAbsolutePath());
+						//设置头像图片为圆角
+					circleHeadImg(headImgBitmap);
+			}
+		}
+		//美化。打开相册操作
+		if (requestCode == 5){   
+			// 获得图片的uri
+			originalUri = data.getData();	
+			Log.e("originalUri", originalUri.toString());
+			Intent intentUri=new Intent(MainActivity.this,scroll.class);
+			intentUri.putExtra("originalUri", originalUri.toString());
+			intentUri.putExtra(Utils.INTENT_FLAG, Utils.FULL_IMAGE);
+			startActivity(intentUri);
+		}
+		super.onActivityResult(requestCode, resultCode, data);
+	}
+	//头像剪裁操作
+	public void startPhotoZoom(Uri uri) {
+		Intent intent = new Intent("com.android.camera.action.CROP");
+		intent.setDataAndType(uri, "image/*");
+		intent.putExtra("crop", "true");
+		// aspectX aspectY 是宽高的比例
+		intent.putExtra("aspectX", 1);
+		intent.putExtra("aspectY", 1);
+		// outputX outputY 是裁剪图片宽高
+		intent.putExtra("outputX", 150);
+		intent.putExtra("outputY", 150);
+		intent.putExtra("return-data", true);
+		startActivityForResult(intent, PHOTORESOULT);
+	}
+	/**  
+     * 选择提示对话框  
+     * ACTION_PICK的使用
+     * 重写onActivityResult方法
+     * 美化
+     */ 
+	private void ShowPickDialog() {  
+        new AlertDialog.Builder(this)  
+                .setTitle("获取图片...")  
+                .setNegativeButton("相册", new DialogInterface.OnClickListener() {  
+                    public void onClick(DialogInterface dialog, int which) {  
+                        dialog.dismiss();
+                        Intent intent = new Intent(Intent.ACTION_PICK, null); 
+                        //设置数据类型 
+                        intent.setDataAndType(  
+                                MediaStore.Images.Media.EXTERNAL_CONTENT_URI,  
+                                "image/*");  
+                        startActivityForResult(intent, 5);  
+                    }  
+                }).show();  
+    }  
+//    设置头像图片是圆角
+	void circleHeadImg(Bitmap headImgBitmap)
+	{
+		Bitmap output = Bitmap.createBitmap(headImgBitmap.getWidth(),
+				headImgBitmap.getHeight(), Config.ARGB_8888);
+		    Canvas canvas = new Canvas(output);
+
+		    final int color = 0xffffffff;
+		    final Paint paint = new Paint();
+		    final Rect rect = new Rect(0, 0, headImgBitmap.getWidth(), headImgBitmap.getHeight());
+		    final RectF rectF = new RectF(rect);
+		    final float roundPx = 12;
+
+		    paint.setAntiAlias(true);
+		    canvas.drawARGB(0, 0, 0, 0);
+		    paint.setColor(color);
+		    canvas.drawRoundRect(rectF, roundPx, roundPx, paint);
+		    paint.setXfermode(new PorterDuffXfermode(Mode.SRC_IN));
+		    canvas.drawBitmap(headImgBitmap, rect, rect, paint);
+			imageview2.setImageBitmap(output);
+	}
+    /**
+     * 百度统计模块
+     */
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		StatService.onPause(this);
+	}
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		StatService.onResume(this);
+	}
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		switch (v.getId())
+		{
+		case R.id.main_activity_main_bnt:
+			Intent intent=new Intent(this,mCamera.class);
+//			Intent intent=new Intent(this,PullDownActivity.class);
+//			intent.putExtra(weiboUtils.weibo_sharePicSucc_key, weiboUtils.weibo_sharePicSucc_Flag2);
+			startActivity(intent);
+			this.finish();
+//			openBeautify();
+			break;
+			default:
+				break;
+		}
+	}  
+    
+}

@@ -1,0 +1,33 @@
+<RelativeLayout
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+     xmlns:android="http://schemas.android.com/apk/res/android"
+     android:padding="5dp">
+    <ImageView 
+        android:id="@+id/share_authorlist_view_iv1"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5dp"
+        android:background="@drawable/app"/>
+    <TextView 
+        android:id="@+id/share_authorlist_view_tv1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="这是MY FIRST"
+        android:textSize="10dp"
+        android:layout_toRightOf="@+id/share_authorlist_view_iv1"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="5dp"></TextView>
+    <TextView
+        android:id="@+id/share_authorlist_view_tv2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/share_authorlist_view_iv1"
+        android:layout_marginLeft="5dp"
+        android:text="2013.2.12"
+        android:textSize="6dp"
+        android:layout_alignParentBottom="true"
+        ></TextView>"
+</RelativeLayout>

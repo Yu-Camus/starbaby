@@ -1,0 +1,41 @@
+package com.starbaby_03.main;
+
+import java.util.Timer;
+import java.util.TimerTask;
+
+import com.example.starbaby_03.R;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.text.format.Time;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.ImageView;
+
+public class appMenu extends Activity{
+	private ImageView imageView;
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+//		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		setContentView(R.layout.main_appmenu);
+		imageView=(ImageView) findViewById(R.id.imageview);
+		final Intent intent=new Intent(this,appMain.class);
+		Timer timer=new Timer();
+		TimerTask timerTask=new TimerTask() {
+			
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				startActivity(intent);
+				finish();
+			}
+		};
+		timer.schedule(timerTask, 1000*2);
+		
+	}
+	
+}

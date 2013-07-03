@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="home_title_bg">#505050</color>
+  	<color name="white">#ffffff</color>
+  	<color name="ground">#797578</color>
+  	<color name="button_text_normal">#ffffffff</color>
+    <color name="button_text_pressed">#ffffffff</color>
+    <color name="line">#ffffe4c4</color>
+    <color name="word">#ffbc8e33</color>
+</resources>

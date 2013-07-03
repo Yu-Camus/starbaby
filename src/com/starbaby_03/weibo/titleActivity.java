@@ -1,0 +1,334 @@
+package com.starbaby_03.weibo;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
+import com.example.starbaby_03.R;
+import com.starbaby_03.Gallery.MyAdapter1;
+import com.starbaby_03.Gallery.mapStorage;
+import com.starbaby_03.main.appMain;
+import com.starbaby_03.utils.saveFile;
+import com.starbaby_03.utils.weiboUtils;
+import com.starbaby_03.weibo.PullDownView.OnPullDownListener;
+
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.BitmapFactory;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.text.format.DateFormat;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
+import android.widget.EditText;
+import android.widget.HeaderViewListAdapter;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
+
+public class titleActivity extends Activity implements OnPullDownListener,
+		OnItemClickListener, OnClickListener {
+
+	private static final int WHAT_DID_LOAD_DATA = 0;
+	private static final int WHAT_DID_REFRESH = 1;
+	private static final int WHAT_DID_MORE = 2;
+
+	private ListView mListView;
+	private ArrayAdapter<String> mAdapter;
+	private PullDownView mPullDownView;
+	private List<String> mStrings = new ArrayList<String>();
+//	private List<Map<String, Object>> strings = new ArrayList<Map<String, Object>>();
+	private ArrayList<title_list> title_list;
+	private ImageButton imgBnt1, imgBnt2;
+	private EditText editText;
+//	private TextView tv;
+	private SimpleDateFormat format = new SimpleDateFormat(
+			"yyyy-MM-dd  hh:mm:ss");
+	private Date curtime = new Date();
+	private String date = format.format(curtime);
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		setContentView(R.layout.weibo_follow_title);
+
+		/*
+		 * 1.使用PullDownView 2.设置OnPullDownListener 3.从mPullDownView里面获取ListView
+		 */
+		mPullDownView = (PullDownView) findViewById(R.id.weibo_follow_title_view);
+		imgBnt1 = (ImageButton) findViewById(R.id.weibo_follow_title_imagebutton);
+		imgBnt2 = (ImageButton) findViewById(R.id.weibo_follow_title_imagebutton2);
+		editText=(EditText) findViewById(R.id.weibo_follow_title_edittext);
+		mPullDownView.setOnPullDownListener(this);
+		imgBnt1.setOnClickListener(this);
+		imgBnt2.setOnClickListener(this);
+		mListView = mPullDownView.getListView();
+		mListView.setDivider(null);
+		mListView.setOnItemClickListener(this);
+		getData();
+		loadData();
+
+		mListView.setAdapter(new MyAdapter(title_list, this));
+
+		mPullDownView.enableAutoFetchMore(true, 1);
+
+	}
+
+	private ArrayList<title_list> getData() {
+		title_list op1 = new title_list("海贼王——路飞", date, saveFile.headName,
+				"路飞");
+		title_list op2 = new title_list("第一剑豪——索隆", date, saveFile.headName,
+				"索隆");
+		title_list op3 = new title_list("第一萌货——乔巴", date,  saveFile.headName,
+				"乔巴");
+		title_list op4 = new title_list("第一萌货——乔巴", date,  saveFile.headName,
+				"乔巴");
+		title_list op5 = new title_list("第一萌货——乔巴", date,  saveFile.headName,
+				"乔巴");
+		title_list = new ArrayList<title_list>();
+		title_list.add(op1);
+		title_list.add(op2);
+		title_list.add(op3);
+		title_list.add(op4);
+		title_list.add(op5);
+		return title_list;
+
+	}
+
+	private void loadData() {
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				String text="";
+				int url=0;
+				try {
+					Thread.sleep(2000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				Message msg = mUIHandler.obtainMessage(WHAT_DID_LOAD_DATA);
+//				title_list title_list1 = new title_list("第一机器人——弗兰奇", date, saveFile.headName, "弗兰奇");
+//				title_list title_list2 = new title_list("第一狙击手——乌索普", date, saveFile.headName, "乌索普");
+//				ArrayList<title_list> title_list = new ArrayList<title_list>();
+//				title_list.add(title_list1);
+//				title_list.add(title_list2);
+//				msg.obj = title_list;
+				msg.sendToTarget();
+//				ArrayList<weibo_list> weiboListss = new ArrayList<weibo_list>();
+//				Intent intent=getIntent();
+//				if(intent.getExtras().getInt(weiboUtils.weibo_sharePicSucc_key)==weiboUtils.weibo_return_Flag3){
+//					Log.e("TAG","你第一次进入");
+//				}else if(intent.getExtras().getInt(weiboUtils.weibo_sharePicSucc_key)==weiboUtils.weibo_sharePicSucc_Flag){
+//					text=intent.getStringExtra("text");
+////					url=Integer.parseInt(intent.getStringExtra("url"));
+//					weibo_list weibo_list1 = new weibo_list(text, date, 2,
+//							R.drawable.img_4,R.drawable.test2 , "路飞");
+////					weibo_list weibo_list2 = new weibo_list(text, date, 2,
+////							R.drawable.img_6, R.drawable.test2, "路飞");
+//					weiboListss.add(weibo_list1);
+////					weiboListss.add(weibo_list2);
+//					msg.obj = weiboListss;
+//				}
+				
+				
+				
+//				msg.sendToTarget();
+			}
+		}).start();
+	}
+
+	// 下拉刷新新内容
+	@Override
+	public void onRefresh() {
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				try {
+					Thread.sleep(2000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				Message msg = mUIHandler.obtainMessage(WHAT_DID_REFRESH);
+//				title_list title_list1 = new title_list("第一厨师——香吉士", date, saveFile.headName, "香吉士");
+////				title_list title_list2 = new title_list("第一航海士——娜美", date, saveFile.headName, "娜美");
+//				ArrayList<title_list> title_list = new ArrayList<title_list>();
+//				title_list.add(title_list1);
+////				title_list.add(title_list2);
+//				msg.obj = title_list;
+				msg.sendToTarget();
+			}
+		}).start();
+	}
+
+	// 上拉，显示更多内容
+	@Override
+	public void onMore() {
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				Message msg = mUIHandler.obtainMessage(WHAT_DID_MORE);
+//				title_list title_list1= new title_list("第一骷髅——布鲁克", date, saveFile.headName, "布鲁克");
+//				ArrayList<title_list> title_list = new ArrayList<title_list>();
+//				title_list.add(title_list1);
+//				msg.obj = title_list;
+				msg.sendToTarget();
+			}
+		}).start();
+	}
+
+	private Handler mUIHandler = new Handler() {
+
+		@Override
+		public void handleMessage(Message msg) {
+			switch (msg.what) {
+			case WHAT_DID_LOAD_DATA: {
+				if (msg.obj != null) {
+					ArrayList<title_list> body = (ArrayList<title_list>) msg.obj;
+					title_list.addAll(0, body);
+					((MyAdapter) mListView.getAdapter()).notifyDataSetChanged();
+				}
+				// 诉它数据加载完毕;
+				mPullDownView.notifyDidLoad();
+				break;
+			}
+			case WHAT_DID_REFRESH: {
+				ArrayList<title_list> body = (ArrayList<title_list>) msg.obj;
+				title_list.addAll(0, body);
+				((MyAdapter) ((HeaderViewListAdapter) mListView.getAdapter())
+						.getWrappedAdapter()).notifyDataSetChanged();
+				// 告诉它更新完毕
+				mPullDownView.notifyDidRefresh();
+				break;
+			}
+
+			case WHAT_DID_MORE: {
+				ArrayList<title_list> body = (ArrayList<title_list>) msg.obj;
+				title_list.addAll(body);
+				((MyAdapter) ((HeaderViewListAdapter) mListView.getAdapter())
+						.getWrappedAdapter()).notifyDataSetChanged();
+				// 告诉它获取更多完毕
+				mPullDownView.notifyDidMore();
+				break;
+			}
+			}
+
+		}
+
+	};
+
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position,
+			long id) {
+		Toast.makeText(this, "啊，你点中我了 " + position, Toast.LENGTH_SHORT).show();
+//		Intent intent = new Intent(CopyOfPullDownActivity.this, CopyOfPullDownActivity.class);
+//		startActivity(intent);
+//		this.finish();
+	}
+
+	class MyAdapter extends BaseAdapter {
+		private Context mContxet;
+		private LayoutInflater inflate;
+		private ArrayList<title_list> title_list;
+
+		public MyAdapter(ArrayList<title_list> title_list, Context context) {
+			this.title_list = title_list;
+			this.mContxet = context;
+			inflate = (LayoutInflater) mContxet
+					.getSystemService(LAYOUT_INFLATER_SERVICE);
+		}
+
+		@Override
+		public int getCount() {
+			// TODO Auto-generated method stub
+			return title_list.size();
+		}
+
+		@Override
+		public Object getItem(int position) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public long getItemId(int position) {
+			// TODO Auto-generated method stub
+			return 0;
+		}
+
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			// TODO Auto-generated method stub
+			convertView = inflate.inflate(R.layout.weibo_follow_item, null);
+			ImageView headImg = (ImageView) convertView
+					.findViewById(R.id.weibo_follow_item_image1);
+			TextView name = (TextView) convertView
+					.findViewById(R.id.weibo_follow_item_name);
+			TextView text = (TextView) convertView
+					.findViewById(R.id.weibo_follow_item_text);
+			ImageView icon = (ImageView) convertView
+					.findViewById(R.id.weibo_follow_item_time_pic);
+			TextView time = (TextView) convertView
+					.findViewById(R.id.weibo_follow_item_time);
+			headImg.setImageBitmap(BitmapFactory.decodeFile(title_list
+					.get(position).imgHeadUrl));
+			name.setText(title_list.get(position).name);
+			text.setText(title_list.get(position).text);
+			time.setText(title_list.get(position).time);
+			return convertView;
+		}
+
+	}
+
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		switch (v.getId()) {
+		case R.id.weibo_pulldown_imagenutton1:
+			startActivity(new Intent(titleActivity.this, appMain.class));
+			titleActivity.this.finish();
+			break;
+		case R.id.weibo_pulldown_imagenutton2:
+			Intent intent = new Intent(titleActivity.this, shareBaby.class);
+			intent.putExtra(weiboUtils.weibo_sharePic_key,
+					weiboUtils.weibo_sharePic_Flag2);
+			intent.putExtra(weiboUtils.weibo_return_key,
+					weiboUtils.weibo_return_Flag);
+			startActivity(intent);
+			this.finish();
+			break;
+		}
+	}
+
+	public void onBackPressed() {
+		super.onBackPressed();
+		titleActivity.this.finish();
+		Intent intent = new Intent(this, appMain.class);
+		startActivity(intent);
+	}
+}

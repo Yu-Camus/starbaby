@@ -1,0 +1,39 @@
+package com.starbaby_03.view;
+
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Paint.Align;
+import android.util.AttributeSet;
+import android.widget.TextView;
+
+public class TextviewView4 extends TextView{
+	private String string ;
+	private Bitmap bitmap;
+	public TextviewView4(Context context, AttributeSet attrs) {
+		super(context, attrs);
+		// TODO Auto-generated constructor stub
+	}
+	public void setText(String string){
+		this.string=string;
+	}
+	public void setBitmap(Bitmap bitmap){
+		this.bitmap=bitmap;
+	}
+	protected void onDraw(Canvas canvas){
+		Paint paint=new Paint();
+		paint.setColor(0xffbc8e33);
+		paint.setTextAlign(Align.CENTER);
+		paint.setTextSize(25f);
+		Paint paint2 = new Paint();
+		paint2.setColor(0xfff7d383);
+		paint2.setTextSize(2);
+		canvas.drawText(string, 60,  40, paint);
+		canvas.drawLine(120, 0, 120, canvas.getHeight(), paint2);
+		canvas.drawBitmap(bitmap,  140, 10, null);
+		canvas.save(Canvas.ALL_SAVE_FLAG);
+		super.onDraw(canvas);
+	}
+}

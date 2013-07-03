@@ -1,0 +1,144 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/camera_relativelayout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <FrameLayout
+        android:id="@+id/camera_framelayout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_centerInParent="true" >
+    </FrameLayout>
+
+    <RelativeLayout
+        android:id="@+id/camerar_elativeLayout3"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/camera_head" >
+
+        <ImageButton
+            android:id="@+id/cameraBnt4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@drawable/camera_topbar_camera_switch" />
+        <!--
+		 <ToggleButton
+                android:id="@+id/toggleButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                 android:background="@drawable/light_button_selector"
+                android:textOff="关闭"
+                android:textOn="打开" />
+	 
+        <ImageButton
+            android:id="@+id/cameraBnt5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/camera_topbar_flash_on" />        -->
+    </RelativeLayout>
+
+    <HorizontalScrollView
+        android:id="@+id/cameraHorizointalScrollview"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/cameralinearlayout2" >
+
+        <LinearLayout
+            android:id="@+id/cameralinearlayout3"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:orientation="horizontal" >
+
+            <ImageButton
+                android:id="@+id/camerar_Bnt1"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:src="@drawable/cartoon_thumb1" >
+            </ImageButton>
+
+            <ImageButton
+                android:id="@+id/camerar_Bnt6"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:src="@drawable/cartoon_thumb2" >
+            </ImageButton>
+
+            <ImageButton
+                android:id="@+id/camerar_Bnt7"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:src="@drawable/cartoon_thumb3" >
+            </ImageButton>
+
+            <ImageButton
+                android:id="@+id/camerar_Bnt8"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:src="@drawable/cartoon_thumb4" >
+            </ImageButton>
+
+            <ImageButton
+                android:id="@+id/camerar_Bnt9"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:src="@drawable/cartoon_thumb5" >
+            </ImageButton>
+
+            <ImageButton
+                android:id="@+id/camerar_Bnt10"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:src="@drawable/cartoon_thumb6" >
+            </ImageButton>
+
+            <ImageButton
+                android:id="@+id/camerar_Bnt11"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:src="@drawable/cartoon_thumb7" >
+            </ImageButton>
+
+            <ImageButton
+                android:id="@+id/camerar_Bnt12"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:src="@drawable/cartoon_thumb8" >
+            </ImageButton>
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <LinearLayout
+        android:id="@+id/cameralinearlayout2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:id="@+id/camerarelativelayout2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/camera_bottom" >
+
+            <ImageButton
+                android:id="@+id/cameraBnt3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/camera_control_btn_lens_normal" />
+
+            <ImageButton
+                android:id="@+id/cameraBnt2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="@drawable/camera_control_btn_shutter" />
+        </RelativeLayout>
+    </LinearLayout>
+</RelativeLayout>

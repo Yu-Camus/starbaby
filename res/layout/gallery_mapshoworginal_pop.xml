@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    >
+	<ImageButton 
+	    android:id="@+id/gallery_mapshoworginal_pop_imagebuttn1"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:background="@drawable/camera_lens_cartoon"
+	    />
+	<ImageButton 
+	    android:id="@+id/gallery_mapshoworginal_pop_imagebuttn2"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:background="@drawable/camera_lens_cartoon"
+	    />
+	<ImageButton 
+	    android:id="@+id/gallery_mapshoworginal_pop_imagebuttn3"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:background="@drawable/camera_lens_cartoon"
+	    />
+</LinearLayout>

@@ -1,0 +1,18 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    >
+	<ImageView 
+	    android:id="@+id/aboutus_centerus_view_imageview1"
+	    android:layout_width="80dp"
+	    android:layout_height="80dp"
+	    android:layout_centerInParent="true"
+	    ></ImageView>"
+	<ImageView 
+	    android:id="@+id/aboutus_centerus_view_imageview2"
+	    android:layout_width="80dp"
+	    android:layout_height="80dp"
+	    android:src="@drawable/head_info"
+	    android:layout_centerInParent="true"
+	    ></ImageView>
+</RelativeLayout>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+   	 android:layout_width="match_parent"
+   	 android:layout_height="match_parent"
+	 android:orientation="vertical"
+	
+	 android:background="#9666"	>
+    
+    <RelativeLayout 
+        android:id="@+id/addword_01_relativelayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/title"
+        >
+        <com.starbaby_03.view.MainActivity_ImgBnt 
+            android:id="@+id/addword_01_ib1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/back_over"
+            android:layout_marginLeft="5dp"
+            ></com.starbaby_03.view.MainActivity_ImgBnt>
+        <TextView
+            android:id="@+id/addword_01_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="编辑文字内容"
+            android:textColor="@color/white"
+            android:textSize="18dp" />
+         <com.starbaby_03.view.MainActivity_ImgBnt  
+            android:id="@+id/addword_01_ib2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/ensuer_lock"
+            ></com.starbaby_03.view.MainActivity_ImgBnt>
+    </RelativeLayout>
+    <LinearLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:background="@drawable/ground">
+         <ImageView 
+        android:id="@+id/imageview1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/title_bottom"></ImageView>
+    <EditText 
+        android:layout_marginTop="40dp"
+        android:id="@+id/addword_01_editText1"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        ></EditText>
+	<TextView 
+	    android:layout_marginTop="40dp"
+	    android:id="@+id/addword_01_textview"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:textSize="20dp"
+	    android:layout_gravity="center_horizontal"
+	    android:text="温馨提示：最多可输入10个字"
+	    ></TextView>
+    </LinearLayout>
+   
+</LinearLayout>

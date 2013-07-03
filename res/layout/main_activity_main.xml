@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center"
+    android:background="@drawable/home">
+     <RelativeLayout 
+         android:id="@+id/main_relativelayout"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+       >
+          <ImageButton 
+            android:id="@+id/main_activity_main_bnt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/set_back"></ImageButton>
+     </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/main_relativelayout"
+        android:layout_alignParentLeft="true" >
+      
+        <ImageView
+            android:id="@+id/main_activity_main_imageview3"
+            android:layout_width="132dp"
+            android:layout_height="132dp"
+            android:layout_centerInParent="true"
+             />
+          <ImageView
+            android:id="@+id/main_activity_main_imageview2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@drawable/appmain_menu"
+             />
+    </RelativeLayout>
+           
+</RelativeLayout>
+    

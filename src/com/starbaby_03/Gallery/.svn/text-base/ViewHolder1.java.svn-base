@@ -1,0 +1,22 @@
+package com.starbaby_03.Gallery;
+
+import android.widget.TextView;
+
+public class ViewHolder1 {
+
+	private ESImageView iv;
+	private TextView tv;
+	public ESImageView getIv() {
+		return iv;
+	}
+	public void setIv(ESImageView iv) {
+		this.iv = iv;
+	}
+	public TextView getTv() {
+		return tv;
+	}
+	public void setTv(TextView tv) {
+		this.tv = tv;
+	}
+
+}

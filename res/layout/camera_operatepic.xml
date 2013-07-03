@@ -1,0 +1,50 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <ImageView
+        android:id="@+id/camera_operatepic_iv1"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+    </ImageView>
+
+    <ImageButton
+        android:id="@+id/camera_operatepic_ibnt3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/camera_operatepic_rl1"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="5dp"
+        android:background="@drawable/camera_beauty" >
+    </ImageButton>
+
+    <RelativeLayout
+        android:id="@+id/camera_operatepic_rl1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/app_main_bottom" >
+
+        <ImageButton
+            android:id="@+id/camera_operatepic_ibnt1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/imagebutton_camera_back" >
+        </ImageButton>
+
+        <ImageButton
+            android:id="@+id/camera_operatepic_ibnt2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/imagebutton_camera_finish" >
+        </ImageButton>
+    </RelativeLayout>
+
+</RelativeLayout>

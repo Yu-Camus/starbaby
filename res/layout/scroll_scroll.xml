@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+	<RelativeLayout 
+	    android:id="@+id/relativelayout"
+	    android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+        android:background="@drawable/title"
+        android:layout_alignParentTop="true"
+	>
+	    <com.starbaby_03.view.MainActivity_ImgBnt 
+	        android:id="@+id/RetureBnt"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentLeft="true"
+	        android:layout_centerVertical="true"
+	        android:layout_marginLeft="5dp"
+            android:background="@drawable/home_over"
+	        />
+	     <TextView 
+	        android:id="@+id/addframe_tv"
+	        android:layout_centerInParent="true"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="美化"
+	        android:textColor="@color/white"
+            android:textSize="18dp"
+            android:layout_centerVertical="true"
+	        ></TextView>
+	    <com.starbaby_03.view.MainActivity_ImgBnt 
+	        android:id="@+id/SaveBnt"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentRight="true"
+	        android:layout_marginRight="5dp"
+	        android:layout_centerVertical="true"
+            android:background="@drawable/ensuer_over"
+	        />
+	</RelativeLayout>
+	<RelativeLayout 
+	    android:id="@+id/RelativeLayout2"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:gravity="center"
+	    android:background="@color/ground"
+	    android:layout_above="@+id/linearlayout3"
+	    android:layout_below="@+id/relativelayout"
+	   >
+	 
+		<ImageView 
+	    android:id="@+id/iv"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:layout_centerInParent="true"
+	  	 ></ImageView>
+		   <ImageView 
+	        android:id="@+id/iv2"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:background="@drawable/title_bottom"
+	        android:layout_alignParentTop="true"/>
+	   </RelativeLayout>
+	 <RelativeLayout 
+	    android:id="@+id/linearlayout3"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentBottom="true"
+	     android:background="@drawable/bottom">
+		<com.starbaby_03.view.MainActivity_ImgBnt
+		    android:id="@+id/scroll_imgBnt1"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:background="@drawable/cut_over"
+		    android:layout_alignParentLeft="true"
+		    android:layout_centerVertical="true"
+		    android:layout_marginLeft="30dp"
+		    ></com.starbaby_03.view.MainActivity_ImgBnt>
+
+		<com.starbaby_03.view.MainActivity_ImgBnt
+		    android:id="@+id/scroll_imgBnt3"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:background="@drawable/word_over"
+		    android:layout_alignParentRight="true"
+		    android:layout_centerVertical="true"
+		     android:layout_marginRight="30dp"
+		    ></com.starbaby_03.view.MainActivity_ImgBnt>
+
+		<com.starbaby_03.view.MainActivity_ImgBnt
+		    android:id="@+id/scroll_imgBnt2"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_alignParentTop="true"
+		    android:layout_centerHorizontal="true"
+		   
+		    android:background="@drawable/frame_over" />
+
+	   </RelativeLayout>
+	
+</RelativeLayout> 

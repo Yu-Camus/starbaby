@@ -1,0 +1,64 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <RelativeLayout
+        android:id="@+id/scrolloperate_rl1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/title" >
+
+        <ImageButton
+            android:id="@+id/scrolloperate_iBnt1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/imagebutton_back" />
+
+        <ImageButton
+            android:id="@+id/scrolloperate_iBnt2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/imagebutton_finish" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="图片描述"
+            android:textColor="@color/white"
+            android:textSize="18dp" />
+    </RelativeLayout>
+	<RelativeLayout 
+	    android:id="@+id/scrolloperate_rl2"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:layout_below="@+id/scrolloperate_rl1"
+	    android:layout_marginTop="20dp">
+	    <ImageView 
+	        android:id="@+id/scrolloperate_iv1"
+	        android:layout_width="50dp"
+	        android:layout_height="50dp"
+	        android:layout_alignParentLeft="true"
+	        android:scaleType="fitXY"
+	        android:layout_marginLeft="10dp"></ImageView>
+	    <EditText
+	        android:id="@+id/scrolloperate_et1"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:hint="图片描述..."
+	        android:textSize="15dp"
+	        android:background="@drawable/scrolloperate_pop"
+	        android:singleLine="false"
+	        android:gravity="top"
+	        android:paddingLeft="10dp"
+	        android:paddingTop="5dp"
+	        android:layout_marginRight="5dp"
+	        android:layout_toRightOf="@+id/scrolloperate_iv1"></EditText>"
+	</RelativeLayout>		
+</RelativeLayout>

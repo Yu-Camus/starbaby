@@ -1,0 +1,131 @@
+package com.starbaby_03.aboutUs;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import com.example.starbaby_03.R;
+import com.starbaby_03.info.user_enter;
+import com.starbaby_03.net.AsyncHttpPost;
+import com.starbaby_03.net.DefaultThreadPool;
+import com.starbaby_03.net.RequestParameter;
+import com.starbaby_03.net.RequestResultCallback;
+import com.starbaby_03.utils.EncodeUtil;
+import com.starbaby_03.utils.MyData;
+import com.starbaby_03.utils.UploadUtil;
+import com.starbaby_03.utils.contentUtils;
+import com.starbaby_03.utils.meshImgUrl;
+
+import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+
+public class infoCenter extends Activity{
+//	private String contentUrl;
+//	private String customid;
+//	private ImageView  iv;
+//	private ImageButton imgBnt1,imgBnt2;
+//	Handler mHandler=new Handler(){
+//
+//		@Override
+//		public void handleMessage(Message msg) {
+//			// TODO Auto-generated method stub
+//			msg.what=1;
+//			String url="http://starbaby.starbaby.cc/uc_server/data/avatar/191/45/13/67_avatar_middle.jpg?1369028682";
+//			iv.setImageBitmap(new meshImgUrl().returnBitMap(url));
+//			super.handleMessage(msg);
+//		}
+//		
+//	};
+//	@Override
+//	protected void onCreate(Bundle savedInstanceState) {
+//		// TODO Auto-generated method stub
+//		super.onCreate(savedInstanceState);
+//		setContentView(R.layout.aboutus_infocenter);
+//		iv=(ImageView) findViewById(R.id.aboutus_infocenter_imageview);
+//		imgBnt2=(ImageButton) findViewById(R.id.aboutus_infocnenter_imagebutton2);
+//		imgBnt2.setOnClickListener(new OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
+//				// TODO Auto-generated method stub
+//				user_enter.sp.edit().clear().commit();
+//			}
+//		});
+////		thread.start();
+////				changeHeadImg();
+//	}
+//	void changeHeadImg(){
+//		File file=new File("/sdcard/ll1x/"+"starbaby"+".jpg");
+//		if(file!=null){
+//		String request = UploadUtil.uploadFile( file, contentUtils.registerImgUrl);
+////            	json解析获取的url
+//			JSONObject json;
+//			try {
+//				json = new JSONObject(request);
+//				contentUrl=json.getString("imageurl");
+//				Log.e("contentUrl", contentUrl);
+//			} catch (JSONException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//		}
+//		Log.e("contentUtils.getUid+", contentUtils.getUid+"");
+//		Log.e("contentUtils.weibo_psw", contentUtils.weibo_psw);
+//		Login(contentUtils.getUid,contentUtils.weibo_psw,contentUrl);
+//		
+//	}
+//	void Login(int uid,String psw,String url){
+//		List<RequestParameter> parameter=new ArrayList<RequestParameter>();
+//		parameter.add(new RequestParameter("uid", uid));
+//		parameter.add(new RequestParameter("pwd", psw));
+//		parameter.add(new RequestParameter("avatar", url));
+//		AsyncHttpPost httpost=new AsyncHttpPost(null, contentUtils.changeImgUrl, parameter, new RequestResultCallback() {
+//			
+//			@Override
+//			public void onSuccess(Object o) {
+//				// TODO Auto-generated method stub
+//				final String result=(String) o;
+//				customid=result.replace("\"","" );
+//				MyData.getInstance().setCustomerid(customid);
+//				infoCenter.this.runOnUiThread(new Runnable() {
+//					
+//					@Override
+//					public void run() {
+//						// TODO Auto-generated method stub
+//						Log.e("result+", result);
+//					}
+//				});
+//			}
+//			
+//			@Override
+//			public void onFail(Exception e) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//		});
+//		DefaultThreadPool.getInstance().execute(httpost);
+//	}
+//	Thread thread=new Thread(new Runnable() {
+//		
+//		@Override
+//		public void run() {
+//			// TODO Auto-generated method stub
+//			
+//			Message msg=new Message();
+//			msg.what=1;
+//			mHandler.sendMessage(msg);
+//		}
+//	});
+}

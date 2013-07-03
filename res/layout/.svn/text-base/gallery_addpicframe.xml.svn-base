@@ -1,0 +1,40 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+<TextView 
+    android:id="@+id/gallery_dialog_view_textview"
+    	android:text="相册名称:"
+		  android:layout_width="wrap_content"
+		  android:layout_height="wrap_content"
+		  android:layout_marginLeft="10dip"
+		  android:textSize="25px"
+		/>
+<RelativeLayout 
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+   >
+    <EditText android:id="@+id/gallery_dialog_view_edittext"
+		  android:layout_width="wrap_content"
+		  android:layout_height="wrap_content"
+		  android:layout_centerVertical="true"
+		  android:layout_alignParentLeft="true"
+		  android:layout_marginLeft="20dp"
+		  android:layout_toLeftOf="@+id/gallery_dialog_view_textview2"
+		  android:layout_marginRight="10dp"
+		  android:textSize="25px"
+/>
+    <TextView 
+    android:id="@+id/gallery_dialog_view_textview2"
+    	android:text="0/8"
+		  android:layout_width="wrap_content"
+		  android:layout_height="wrap_content"
+		  android:layout_marginRight="10dip"
+		  android:layout_alignParentRight="true"
+		  android:layout_centerVertical="true"
+		  android:textSize="25px"
+		/>
+</RelativeLayout>
+
+</LinearLayout>

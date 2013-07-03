@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout 
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+     xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout 
+        android:id="@+id/weibo_pulldown_relativelayout1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/title"
+        android:layout_alignParentTop="true">
+        <ImageButton 
+            android:id="@+id/weibo_pulldown_imagenutton1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/imagebutton_back"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"></ImageButton>
+        <TextView 
+            android:id="@+id/weibo_pulldown_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="share宝贝"
+            android:textSize="18dp"
+            android:textColor="#ffffff"
+            android:layout_centerInParent="true"/>
+        <ImageButton 
+            android:id="@+id/weibo_pulldown_imagenutton2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/imagebutton_share"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="5dp"></ImageButton>
+    </RelativeLayout>
+    <com.starbaby_03.weibo.PullDownView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/pull_down_view"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/share_background"
+    android:layout_below="@+id/weibo_pulldown_relativelayout1"
+    android:layout_alignParentBottom="true"
+    android:padding="10dp"
+    >
+	
+</com.starbaby_03.weibo.PullDownView>
+<ImageView 
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:background="@drawable/title_bottom"
+	    android:layout_below="@+id/weibo_pulldown_relativelayout1"/>
+</RelativeLayout>
+<!--  
+<com.starbaby_03.weibo.PullDownView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/pull_down_view"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@android:color/white">
+
+</com.starbaby_03.weibo.PullDownView>
+-->

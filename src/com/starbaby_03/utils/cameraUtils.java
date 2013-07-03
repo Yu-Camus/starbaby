@@ -1,0 +1,12 @@
+package com.starbaby_03.utils;
+
+import android.graphics.Bitmap;
+
+public class cameraUtils {
+	public static float X;
+	public static float Y;
+	public static Bitmap bit;
+	public static float width;
+	public static float height;
+	public static Bitmap bitmap;
+}

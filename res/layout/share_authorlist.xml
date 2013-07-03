@@ -1,0 +1,74 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+
+    <RelativeLayout
+        android:id="@+id/share_authorlist_rl1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/title" >
+
+        <ImageButton
+            android:id="@+id/share_authorlist_ibnt1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/imagebutton_back" >
+        </ImageButton>
+
+        <TextView
+            android:id="@+id/share_authorlist_tv1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text=""
+            android:textSize="18dp" >
+        </TextView>
+
+        <ImageButton
+            android:id="@+id/share_authorlist_ibnt2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/imagebutton_back" >
+        </ImageButton>
+    </RelativeLayout>
+	<ListView 
+	    android:layout_below="@+id/share_authorlist_rl1"
+	    android:layout_above="@+id/share_authorlist_rl2"
+	    android:id="@+id/share_authorlist_lv1"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"></ListView>
+	<RelativeLayout
+	    android:id="@+id/share_authorlist_rl2"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:background="@drawable/bottom"
+	    android:layout_alignParentBottom="true"
+	    >
+	    <EditText 
+	        android:id="@+id/share_authorlist_et1"
+	        android:text=""
+	        android:textSize="10dp"
+	        android:layout_height="wrap_content"
+	        android:layout_width="fill_parent"
+	        android:layout_marginLeft="50dp"
+	        android:layout_marginRight="70dp"
+	        android:layout_marginTop="5dp"
+	        android:layout_marginBottom="5dp"
+	        ></EditText>
+	    <ImageButton
+	        android:id="@+id/share_authorlist_ibnt3"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:background="@drawable/imagebutton_finish"
+	        android:layout_centerVertical="true"
+	        android:layout_alignParentRight="true"
+	        android:layout_marginRight="10dp"></ImageButton>"
+	</RelativeLayout>"
+</RelativeLayout>

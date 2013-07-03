@@ -1,0 +1,27 @@
+package com.starbaby_03.utils;
+
+import android.content.SharedPreferences;
+
+public class contentUtils {
+	
+	public static String enterUrl="http://www.starbaby.cn/appApi/validateUser";//登入接口
+	public static String registerImgUrl="http://www.starbaby.cn/appApi/imageup";//注册前，先上传头像接口，返回头像url
+	public static String registerUrl="http://www.starbaby.cn/appApi/register";//注册接口
+	public static String changeImgUrl="http://www.starbaby.cn/appApi/editAvatar";//修改头像接口
+	public static String getImgUrl="http://www.starbaby.cn/appApi/avatar_api";//获取用户头像接口
+	
+	public static String headImgUrl="";
+	public static int uid=0;//用户头像外部UID
+	public static int imgSize=1;//头像尺寸 :1-48*48px；2-120*120px；3-200*200px
+	
+	public static int msg=0;
+	public static String username=null;
+	public static String email=null;
+	public static String avatar=null;
+	public static String imageurl=null;
+	public static String psw=null;
+	
+	public static SharedPreferences sp=null;
+	public static SharedPreferences spinfo=null;
+	
+}

@@ -1,0 +1,41 @@
+
+<LinearLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="top"
+        android:background="@drawable/info_title">
+        <ImageButton 
+            android:id="@+id/aboutus_infocnenter_imagebutton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/info_back_over"></ImageButton>
+    </RelativeLayout>
+    <RelativeLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/info_background"
+        >
+        <ImageView 
+            android:id="@+id/aboutus_infocenter_imageview"
+            android:layout_height="80dp"
+            android:layout_width="80dp"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="20dp"
+            android:scaleType="centerCrop"
+            android:background="@drawable/info_head"></ImageView>
+        <ImageButton 
+            android:id="@+id/aboutus_infocnenter_imagebutton2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/info_back_over"
+            android:layout_below="@+id/aboutus_infocenter_imageview"></ImageButton>   
+             </RelativeLayout>
+</LinearLayout>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/news_list"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/news_item_bg"
+    android:orientation="vertical" >
+
+    <com.starbaby_03.main.ScaleImageView
+        android:id="@+id/news_pic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@null" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <TextView
+            android:id="@+id/news_name"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="false"
+            android:textColor="#656565"
+            android:ellipsize="marquee">
+            
+        </TextView>
+		
+        <TextView
+            android:id="@+id/news_note"
+            android:layout_below="@+id/news_name"
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|bottom"
+            android:ellipsize="marquee"
+            android:textColor="#656565" />
+    </RelativeLayout>
+</LinearLayout>

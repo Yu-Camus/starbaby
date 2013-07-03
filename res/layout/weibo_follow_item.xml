@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+     android:background="@drawable/item_select"
+     >
+
+    
+	    <RelativeLayout
+	        android:id="@+id/weibo_follow_item_relativelayout"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@+id/weibo_follow_item_image2">
+	          <RelativeLayout 
+	              android:id="@+id/weibo_follow_item_relativelayout4"
+	              android:layout_width="fill_parent"
+	              android:layout_height="wrap_content"
+	              android:layout_below="@+id/weibo_follow_item_image3"
+	              android:layout_marginTop="5dp">
+	               <ImageView 
+        				android:id="@+id/weibo_follow_item_image1"
+        				android:layout_width="60dp"
+       					android:layout_height="60dp"
+       					android:scaleType="fitXY"
+        				android:background="@drawable/app"
+        				android:layout_alignParentLeft="true"
+        				android:layout_centerVertical="true"
+        				android:layout_marginLeft="5dp"
+       				 />
+	               <TextView 
+	                   android:id="@+id/weibo_follow_item_name"
+	                   android:layout_width="wrap_content"
+	                   android:layout_height="wrap_content"
+	                   android:layout_toRightOf="@+id/weibo_follow_item_image1"
+	                   android:layout_marginLeft="10dp"
+	                   android:layout_centerVertical="true"
+	                   android:text="路飞"></TextView>
+	               <TextView 
+	                   android:id="@+id/weibo_follow_item_text"
+	                   android:layout_width="fill_parent"
+	                   android:layout_height="wrap_content"
+	                   android:layout_toRightOf="@+id/weibo_follow_item_name"
+	                   android:layout_toLeftOf="@+id/weibo_follow_item_relativelayout5"
+	                   android:layout_centerVertical="true"
+	                   android:text="路飞路飞路飞路飞"></TextView>
+	               <RelativeLayout
+	                   android:id="@+id/weibo_follow_item_relativelayout5"
+	                   android:layout_width="wrap_content"
+	                   android:layout_height="wrap_content"
+	                   android:layout_alignParentRight="true"
+	                   android:layout_centerVertical="true"
+	                   android:layout_marginRight="5dp">
+	                   <LinearLayout 
+	                       android:layout_width="wrap_content"
+	                       android:layout_height="wrap_content"
+	                       android:orientation="vertical"
+	                       android:layout_alignParentLeft="true"
+	                       android:layout_centerVertical="true">
+	                        <ImageView 
+	                       android:id="@+id/weibo_follow_item_time_pic"
+	                       android:layout_width="wrap_content"
+	                       android:layout_height="wrap_content"
+	                       android:background="@drawable/add_reply_over"
+	                       android:layout_alignParentLeft="true"
+	                       android:layout_marginLeft="10dp"
+	                       android:layout_centerVertical="true"
+	                       ></ImageView>
+	                    <TextView 
+			          	android:id="@+id/weibo_follow_item_time"
+			            android:layout_toRightOf="@+id/weibo_follow_item_time_pic"
+			            android:layout_width="wrap_content"
+			            android:layout_height="wrap_content"
+			            android:layout_marginLeft="10dp"
+			            android:textSize="10dp"
+			            android:text="09:08"
+			            android:layout_centerVertical="true"
+					    android:textColor="@android:color/black"></TextView>
+	                   </LinearLayout>
+	                  
+	               </RelativeLayout>
+	              
+	          </RelativeLayout>
+	       
+	    </RelativeLayout>
+</RelativeLayout>

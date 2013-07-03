@@ -1,0 +1,252 @@
+package com.starbaby_03.Gallery;
+
+import java.awt.ItemSelectable;
+import java.io.File;
+import java.io.IOException;
+
+import com.example.starbaby_03.R;
+import com.starbaby_03.main.MainActivity;
+import com.starbaby_03.saveAndSearch.savePhoto;
+import com.starbaby_03.scroll.scroll;
+import com.starbaby_03.utils.Utils;
+import com.starbaby_03.utils.beautyUtils;
+import com.starbaby_03.utils.galleryUtils;
+import com.starbaby_03.utils.scaleBitmapUtils;
+import com.starbaby_03.utils.weiboUtils;
+import com.starbaby_03.view.MainActivity_ImgBnt;
+import com.starbaby_03.weibo.shareBaby;
+
+import android.annotation.SuppressLint;
+import android.app.ActionBar.LayoutParams;
+import android.app.Activity;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
+import android.view.Window;
+import android.view.ViewTreeObserver.OnGlobalLayoutListener;
+import android.view.animation.AnimationUtils;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.BaseAdapter;
+import android.widget.Gallery;
+import android.widget.ImageButton;
+import android.widget.ImageSwitcher;
+import android.widget.ImageView;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
+import android.widget.ViewSwitcher.ViewFactory;
+
+public class mapShowOrginal extends Activity implements
+		android.view.View.OnClickListener, ViewFactory, OnItemSelectedListener {
+
+	private ImageButton imgBnt1, imgBnt5;
+	private MainActivity_ImgBnt imgBnt2, imgBnt3, imgBnt4;
+	private ImageView imageview;
+	private String url;
+	private Bitmap bit;
+	private PopupWindow pop;
+	private ImageSwitcher imgSwitch;
+	private Gallery gallery;
+	private MyAdapter1 adapter;
+	private RelativeLayout gallery_mapshoworginal_relativelayout3;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		setContentView(R.layout.gallery_mapshoworginal);
+		init();
+		listener();
+	}
+
+	private void listener() {
+		// TODO Auto-generated method stub
+		gallery.setOnItemSelectedListener(this);
+		imgBnt1.setOnClickListener(this);
+		imgBnt2.setOnClickListener(this);
+		imgBnt3.setOnClickListener(this);
+		imgBnt4.setOnClickListener(this);
+		imgBnt5.setOnClickListener(this);
+	}
+
+	@SuppressLint("NewApi")
+	void init() {
+		imgBnt1 = (ImageButton) findViewById(R.id.gallery_mapshoworginal_imagebutton1);
+		imgBnt2 = (MainActivity_ImgBnt) findViewById(R.id.gallery_mapshoworginal_imagebutton2);
+		imgBnt3 = (MainActivity_ImgBnt) findViewById(R.id.gallery_mapshoworginal_imagebutton3);
+		imgBnt4 = (MainActivity_ImgBnt) findViewById(R.id.gallery_mapshoworginal_imagebutton4);
+		imgBnt5 = (ImageButton) findViewById(R.id.gallery_mapshoworginal_imagebutton5);
+		imgSwitch = (ImageSwitcher) findViewById(R.id.gallery_mapshoworginal_imageswitcher);
+		imgBnt2.setText("删除");
+		imgBnt2.setTextsize(14f);
+		imgBnt2.setColor(Color.WHITE);
+		imgBnt3.setText("美化");
+		imgBnt3.setTextsize(14f);
+		imgBnt3.setColor(Color.WHITE);
+		imgBnt4.setText("设置桌面");
+		imgBnt4.setTextsize(14f);
+		imgBnt4.setColor(Color.WHITE);
+		imgSwitch.setFactory(mapShowOrginal.this);
+		imgSwitch.setInAnimation(AnimationUtils.loadAnimation(this,
+				android.R.anim.fade_in));
+		imgSwitch.setOutAnimation(AnimationUtils.loadAnimation(this,
+				android.R.anim.fade_out));
+		url = weiboUtils.weibo_picUrl;
+		Log.e("url=", url);
+		imgSwitch.setImageDrawable(Drawable.createFromPath(url));
+		gallery = (Gallery) findViewById(R.id.gallery_mapshoworginal_gallery);
+		adapter = new MyAdapter1(mapShowOrginal.this, galleryUtils.picList);
+		gallery.setAdapter(adapter);
+		gallery.setSelection(galleryUtils.position);
+		gallery_mapshoworginal_relativelayout3 = (RelativeLayout) findViewById(R.id.gallery_mapshoworginal_relativelayout3);
+		ViewTreeObserver vot = gallery_mapshoworginal_relativelayout3
+				.getViewTreeObserver();
+		vot.addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
+
+			@Override
+			public void onGlobalLayout() {
+				// TODO Auto-generated method stub
+				gallery_mapshoworginal_relativelayout3.getViewTreeObserver()
+						.removeGlobalOnLayoutListener(this);
+				beautyUtils.layoutHight = gallery_mapshoworginal_relativelayout3
+						.getHeight();
+				beautyUtils.layoutWidth = getWindowManager()
+						.getDefaultDisplay().getWidth();
+				Log.e("Hight=",
+						gallery_mapshoworginal_relativelayout3.getHeight() + "");
+				beautyUtils.layoutHight = gallery_mapshoworginal_relativelayout3
+						.getHeight();
+				beautyUtils.layoutWidth = getWindowManager()
+						.getDefaultDisplay().getWidth();
+			}
+		});
+	}
+
+	public void onBackPressed() {
+		super.onBackPressed();
+		mapShowOrginal.this.finish();
+		Intent intent = new Intent(this, mapShowMin.class);
+		String path3 = new mapStorage().listFile.get(
+				new mapStorage().currentPostion).toString();
+		intent.putExtra("url", path3);// 返回当前选择的相册目录下
+		intent.putExtra(weiboUtils.weibo_sharePic_key,
+				weiboUtils.weibo_showPic_Flag);
+		startActivity(intent);
+	}
+
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		switch (v.getId()) {
+		case R.id.gallery_mapshoworginal_imagebutton1:
+			// 返回
+			String path3 = new mapStorage().listFile.get(
+					new mapStorage().currentPostion).toString();
+			Intent intent2 = new Intent(this, mapShowMin.class);
+			intent2.putExtra("url", path3);// 返回当前选择的相册目录下
+			intent2.putExtra(weiboUtils.weibo_sharePic_key,
+					weiboUtils.weibo_showPic_Flag);
+			startActivity(intent2);
+			this.finish();
+			break;
+		case R.id.gallery_mapshoworginal_imagebutton2:
+			// 删除
+			File file = new File(url);
+			if (file.exists()) {
+				file.delete();
+				Toast.makeText(this, "文件被删除", 1000).show();
+				String path2 = new mapStorage().listFile.get(
+						new mapStorage().currentPostion).toString();
+				Intent intent = new Intent(this, mapShowMin.class);
+				intent.putExtra(weiboUtils.weibo_sharePic_key,
+						weiboUtils.weibo_showPic_Flag);
+				intent.putExtra("url", path2);
+				startActivity(intent);
+				this.finish();
+			}
+			break;
+		case R.id.gallery_mapshoworginal_imagebutton3:
+			// 美化
+			Intent intent3 = new Intent(this, scroll.class);
+			intent3.putExtra(Utils.INTENT_FLAG, Utils.CROP_IMAGE);
+			File file2 = new File(url);
+			try {
+				new savePhoto().scale(file2, beautyUtils.layoutWidth,
+						beautyUtils.layoutHight);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			startActivity(intent3);
+			this.finish();
+			break;
+		case R.id.gallery_mapshoworginal_imagebutton4:
+			// 设置桌面
+			try {
+				bit = BitmapFactory.decodeFile(url);
+				getApplicationContext().setWallpaper(bit);
+				Toast.makeText(this, "设置成功", 1000).show();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
+		case R.id.gallery_mapshoworginal_imagebutton5:
+			// 晒图
+			Intent intent = new Intent(this, shareBaby.class);
+			intent.putExtra(weiboUtils.weibo_sharePic_key,
+					weiboUtils.weibo_sharePic_Flag);
+			intent.putExtra(weiboUtils.weibo_return_key,
+					weiboUtils.weibo_return_Flag2);
+			startActivity(intent);
+			break;
+		}
+	}
+
+	@Override
+	public View makeView() {
+		// TODO Auto-generated method stub
+		ImageView iv = new ImageView(this);
+//		iv.setBackgroundColor(0xFF000000);
+//		iv.setScaleType(ImageView.ScaleType.FIT_CENTER);
+		iv.setLayoutParams(new ImageSwitcher.LayoutParams(
+				LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
+		return iv;
+	}
+
+	@SuppressLint("NewApi")
+	@Override
+	public void onItemSelected(AdapterView<?> arg0, View view, int position,
+			long arg3) {
+		// TODO Auto-generated method stub
+		url = weiboUtils.pathList_1.get(position).toString();
+		weiboUtils.weibo_picUrl = url;
+		imgSwitch.setImageDrawable(Drawable.createFromPath(url));
+		Log.e("one piece", "you did it");
+		Log.e("one piece", position + "");
+	}
+
+	@Override
+	public void onNothingSelected(AdapterView<?> arg0) {
+		// TODO Auto-generated method stub
+
+	}
+}

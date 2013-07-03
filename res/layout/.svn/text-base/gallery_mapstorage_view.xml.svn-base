@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dp" >
+
+    <!--
+        <com.starbaby_03.view.CircleImageView
+            android:id="@+id/gallery_mapstorage_view_imageview"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:scaleType="centerInside"
+            android:src="@drawable/app" />    -->
+
+    <ImageView
+        android:id="@+id/gallery_mapstorage_view_imageview2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        android:background="@drawable/gallery_mapstorage_bookself"
+        android:layout_below="@+id/gallery_mapstorage_view_textview"
+        android:layout_marginTop="-23dp" />
+
+    <ImageView
+        android:id="@+id/gallery_mapstorage_view_imageview"
+        android:layout_centerHorizontal="true"
+        android:layout_width="94dp"
+        android:layout_height="97dp"
+         android:layout_centerVertical="true"
+        android:scaleType="center"
+        android:background="@drawable/app"
+        ></ImageView>
+    <ImageView
+        android:id="@+id/gallery_mapstorage_view_imageview3"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:scaleType="fitXY"
+        android:background="@drawable/gallery_mapstorage_frame2"></ImageView>
+
+    <TextView
+        android:id="@+id/gallery_mapstorage_view_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/gallery_mapstorage_view_imageview"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:text="cell_name"
+        android:textColor="@color/white"
+        android:textSize="10dp"
+        android:gravity="center"
+        android:background="@drawable/gallery_mapstorage_title" />
+
+</RelativeLayout>

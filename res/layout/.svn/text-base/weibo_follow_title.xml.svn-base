@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout 
+        android:id="@+id/weibo_follow_title_relativelayout1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/title">
+        <ImageButton 
+            android:id="@+id/weibo_follow_title_imagebutton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/imagebutton_back"></ImageButton>
+        <TextView
+            android:id="@+id/weibo_follow_title_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="你好"
+            android:textSize="18dp"
+            android:textColor="#ffffff"
+            android:layout_centerInParent="true"></TextView>
+    </RelativeLayout>
+   
+     <com.starbaby_03.weibo.PullDownView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_below="@+id/weibo_follow_title_relativelayout1"
+    android:layout_above="@+id/weibo_follow_title_relativelayout2"
+    android:id="@+id/weibo_follow_title_view"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+   android:background="@drawable/share_background"
+    >
+
+</com.starbaby_03.weibo.PullDownView>
+ <ImageView 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/title_bottom"
+        android:layout_below="@+id/weibo_follow_title_relativelayout1"/>
+<RelativeLayout
+    android:id="@+id/weibo_follow_title_relativelayout2"
+    android:layout_width="fill_parent"
+    android:layout_height="50dp"
+    android:layout_alignParentBottom="true"
+    >
+    <EditText 
+        android:id="@+id/weibo_follow_title_edittext"
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="100dp"
+        android:layout_centerVertical="true"
+        android:hint="对babay说点什么吧"
+        android:textSize="20dp"></EditText>
+    <ImageButton
+        android:id="@+id/weibo_follow_title_imagebutton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/info_ensure_over"></ImageButton>
+</RelativeLayout>
+</RelativeLayout>

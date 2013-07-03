@@ -1,0 +1,6 @@
+package com.starbaby_03.utils;
+
+public class beautyUtils {
+	public static int layoutHight;
+	public static int layoutWidth;
+}

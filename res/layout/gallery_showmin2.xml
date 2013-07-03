@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/gallery_showmin2_relativelayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/title" >
+
+        <ImageButton
+            android:id="@+id/gallery_showmin2_imagebutton1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/imagebutton_back" >
+        </ImageButton>
+
+        <TextView
+            android:id="@+id/gallery_showmin2_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text=""
+            android:textColor="#ffffffff"
+            android:textSize="18dp" >
+        </TextView>
+		 <ImageButton 
+            android:id="@+id/gallery_showmin2_imagebutton3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/gallery_showmin2_imagebutton2"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/camera_over"></ImageButton>
+        <ImageButton
+            android:id="@+id/gallery_showmin2_imagebutton2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/imagebutton_insert" >
+        </ImageButton>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/gallery_showmin2_ll1"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/gallery_showmin2_relativelayout"
+        android:orientation="vertical" >
+
+        <include
+            android:id="@+id/progressbar"
+            layout="@layout/gallery_showmin_loading" />
+
+        <!-- 自定义 ScrollView -->
+
+        <com.starbaby_03.Gallery.LazyScrollView
+            android:id="@+id/waterfall_scroll"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1" >
+
+            <LinearLayout
+                android:id="@+id/waterfall_container"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:padding="2dp" >
+            </LinearLayout>
+        </com.starbaby_03.Gallery.LazyScrollView>
+
+        <TextView
+            android:id="@+id/loadtext"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/loading_bg"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="Loading..."
+            android:textColor="@android:color/background_dark" />
+    </LinearLayout>
+
+</RelativeLayout>

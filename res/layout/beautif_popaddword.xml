@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+   <HorizontalScrollView 
+            android:id="@+id/addword_horizontalScrollView1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/home_title_bg"
+             >
+	
+            <LinearLayout 
+           android:id="@+id/addword_linearlayout"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_gravity="center_vertical"
+           
+          >
+            <ImageButton
+           android:id="@+id/addword_but1"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:src="@drawable/cartoon_thumb1"
+           >
+       </ImageButton>
+       <ImageButton
+           android:id="@+id/addword_but2"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:src="@drawable/cartoon_thumb2"
+           >
+       </ImageButton>
+       <ImageButton
+           android:id="@+id/addword_but3"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:src="@drawable/cartoon_thumb3"
+           >
+       </ImageButton>
+       <ImageButton
+           android:id="@+id/addword_but4"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:src="@drawable/cartoon_thumb4"
+           >
+       </ImageButton>
+       <ImageButton
+           android:id="@+id/addword_but5"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:src="@drawable/cartoon_thumb5"
+           >
+       </ImageButton>
+       <ImageButton
+           android:id="@+id/addword_but6"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:src="@drawable/cartoon_thumb6"
+           >
+       </ImageButton>
+        <ImageButton
+           android:id="@+id/addword_but7"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:src="@drawable/cartoon_thumb7"
+           >
+       </ImageButton>
+        <ImageButton
+           android:id="@+id/addword_but8"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:src="@drawable/cartoon_thumb8"
+           >
+       </ImageButton>
+      </LinearLayout>
+
+        </HorizontalScrollView>
+
+</LinearLayout>
+    

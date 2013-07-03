@@ -16,6 +16,7 @@ import com.starbaby_03.main.HotInfo;
 import com.starbaby_03.main.Helper;
 import com.starbaby_03.main.ImageFetcher;
 import com.starbaby_03.main.MainActivity;
+import com.starbaby_03.main.PLA_AdapterView;
 import com.starbaby_03.main.ScaleImageView;
 import com.starbaby_03.main.XListView;
 import com.starbaby_03.main.XListView.IXListViewListener;
@@ -55,7 +56,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class infoCenter extends Activity implements IXListViewListener,
-		OnClickListener, OnItemClickListener {
+		OnClickListener{
 	private LayoutInflater inflate;
 	private ViewPager pager;
 	private List<View> list;
@@ -77,7 +78,7 @@ public class infoCenter extends Activity implements IXListViewListener,
 	public ArrayList<HotInfo> duitangs;
 	private int new_current_page_down = 1;//最新 ：当前页面，用于下拉，向接口获取数据。
 	private int new_current_page_up = 1;//最新 ：当前页面，用于上拉，向接口获取数据。
-	private int FLAG = 1;
+//	private int FLAG = 1;
 	/**
 	 * 相册下的图片读取
 	 * 
@@ -146,6 +147,7 @@ public class infoCenter extends Activity implements IXListViewListener,
 					JSONArray datalistArray = json.getJSONArray("datalist");
 					for (int i = 0; i < datalistArray.length(); i++) {
 						HotInfo info = new HotInfo();
+						
 						JSONObject imgObject = datalistArray.getJSONObject(i);
 						JSONArray commentlistArray = imgObject
 								.getJSONArray("commentlist");
@@ -164,10 +166,11 @@ public class infoCenter extends Activity implements IXListViewListener,
 						info.setIsrc(imgObject.isNull("img") ? "" : imgObject
 								.getString("img"));
 						info.setHeight(170);
+						info.setPicId(imgObject.getString("picid"));
 						duitangs.add(info);
 					}
 				} catch (JSONException e) {
-					// TODO Auto-generated catch block
+					// 
 					e.printStackTrace();
 				}
 			}
@@ -195,12 +198,10 @@ public class infoCenter extends Activity implements IXListViewListener,
 	public class StaggeredAdapter extends BaseAdapter {
 		private Context mContext;
 		private LinkedList<HotInfo> mInfos;
-		private XListView mListView;
 
-		public StaggeredAdapter(Context context, XListView xListView) {
+		public StaggeredAdapter(Context context) {
 			mContext = context;
 			mInfos = new LinkedList<HotInfo>();
-			mListView = xListView;
 		}
 
 		@Override
@@ -216,7 +217,7 @@ public class infoCenter extends Activity implements IXListViewListener,
 				holder = new ViewHolder();
 				holder.imageView = (ScaleImageView) convertView
 						.findViewById(R.id.news_pic);
-				holder.imageView.setOnClickListener(infoCenter.this);
+				//holder.imageView.setOnClickListener(infoCenter.this);
 				holder.contentView = (TextView) convertView
 						.findViewById(R.id.news_name);
 				holder.timeView = (TextView) convertView
@@ -256,7 +257,7 @@ public class infoCenter extends Activity implements IXListViewListener,
 		}
 
 		@Override
-		public Object getItem(int arg0) {
+		public HotInfo getItem(int arg0) {
 			return mInfos.get(arg0);
 		}
 
@@ -265,13 +266,13 @@ public class infoCenter extends Activity implements IXListViewListener,
 			return 0;
 		}
 		public void addItemRefresh(List<HotInfo> datas){
-			if(FLAG == 2){
+//			if(FLAG == 2){
 				mInfos.clear();
 				mInfos.addAll(datas);
-			}else if(FLAG == 1){
-				mInfos.addAll(datas);
-				mInfos.clear();
-			}
+//			}else if(FLAG == 1){
+//				mInfos.addAll(datas);
+//				mInfos.clear();
+//			}
 			
 		}
 		public void addItemLast(List<HotInfo> datas) {
@@ -296,7 +297,19 @@ public class infoCenter extends Activity implements IXListViewListener,
 		init();
 		listener();
 		InitViewPager();
-		gv.setOnItemClickListener(this);
+		gv.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				duitangs.clear();
+				int albumid = aboutUsUtils_list.get(position).getAlbumid();
+				shortUrl = contentUtils.photoList + albumid + "/";
+//				FLAG = 2;
+				onResume();
+				pager.setCurrentItem(1);
+			}
+		});
 		ViewHolder holder = null;
 	}
 
@@ -341,10 +354,18 @@ public class infoCenter extends Activity implements IXListViewListener,
 		mAdapterView = (XListView) view2.findViewById(R.id.list1);
 		mAdapterView.setPullLoadEnable(true);
 		mAdapterView.setXListViewListener(this);
-		mAdapter = new StaggeredAdapter(this, mAdapterView);
+		mAdapterView.setOnItemClickListener(new PLA_AdapterView.OnItemClickListener() {
+
+			@Override
+			public void onItemClick(PLA_AdapterView<?> parent, View view,
+					int position, long id) {
+				Toast.makeText(infoCenter.this, "点击的id = " + mAdapter.getItem(position).getPicId(), 1).show();
+			}
+		});
+		mAdapter = new StaggeredAdapter(this);
 		mImageFetcher = new ImageFetcher(this, 240);
 		mImageFetcher.setLoadingImage(R.drawable.empty_photo);
-
+		
 		pager = (ViewPager) findViewById(R.id.vPager);
 		list = new ArrayList<View>();
 		list.add(view1);
@@ -477,9 +498,9 @@ public class infoCenter extends Activity implements IXListViewListener,
 			ImageView frameView = (ImageView) convertView
 					.findViewById(R.id.aboutus_infocenter_store_frame_imageview);
 			name.setText(aboutUsUtils.get(position).name);
-			Bitmap bit = new meshImgUrl().returnBitMap(aboutUsUtils
-					.get(position).picUrl);
-			frameView.setImageBitmap(bit);
+//			Bitmap bit = new meshImgUrl().returnBitMap(aboutUsUtils
+//					.get(position).picUrl);
+//			frameView.setImageBitmap(bit);
 			return convertView;
 		}
 
@@ -543,22 +564,20 @@ public class infoCenter extends Activity implements IXListViewListener,
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
-		case R.id.news_pic:
-			Toast.makeText(this, "你点击了我", 1000).show();
-			break;
 		case R.id.aboutus_infocenter_ibnt1:
 			startActivity(new Intent(this, MainActivity.class));
 			break;
 		}
 	}
 
-	@Override
-	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-		duitangs.clear();
-		int albumid = aboutUsUtils_list.get(arg2).getAlbumid();
-		shortUrl = contentUtils.photoList + albumid + "/";
-		FLAG = 2;
-		onResume();
-		pager.setCurrentItem(1);
-	}
+//	@Override
+//	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+//		duitangs.clear();
+//		int albumid = aboutUsUtils_list.get(arg2).getAlbumid();
+//		shortUrl = contentUtils.photoList + albumid + "/";
+////		FLAG = 2;
+//		onResume();
+//		pager.setCurrentItem(1);
+//	}
+
 }

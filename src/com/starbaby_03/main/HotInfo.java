@@ -7,6 +7,15 @@ import com.starbaby_03.utils.beautyUtils;
 public class HotInfo {
 
 	private int height;
+	private String picId;
+	public String getPicId() {
+		return picId;
+	}
+
+	public void setPicId(String picId) {
+		this.picId = picId;
+	}
+
 	private ArrayList<String> authorList = new ArrayList<String>();
 	private ArrayList<String> commentList = new ArrayList<String>();
 	private String isrc = "";
